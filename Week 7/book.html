@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Details</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div id="bookDetails"></div>
+    <button onclick="window.history.back()" class="checkout-btn">⟵ Back</button>
+  </div>
+  <script type="module">
+    import { books } from './data.js';
+    const params = new URLSearchParams(window.location.search);
+    const index = params.get("index");
+    const book = books[index];
+    const bookDetailsDiv = document.getElementById("bookDetails");
+    if(book) {
+      bookDetailsDiv.innerHTML = `
+        <h2>${book.title}</h2>
+        <p><strong>Author:</strong> ${book.author}</p>
+        <p><strong>Price:</strong> ₹${book.price}</p>
+        <p><strong>Status:</strong> ${book.availability}</p>
+      `;
+    } else {
+      bookDetailsDiv.textContent = "Book not found.";
+    }
+  </script>
+</body>
+</html>

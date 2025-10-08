@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Product Store</title>
+  <link href="https://fonts.googleapis.com/css?family=Orbitron:700|Roboto:400" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(120deg, #6a85b6 0%, #bac8e0 100%);
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .glass {
+      background: rgba(255,255,255,0.14);
+      border-radius: 22px;
+      border: 2px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      padding: 18px 40px;
+      margin: 45px auto 0 auto;
+      width: 80vw;
+      transition: box-shadow 0.3s ease;
+    }
+    .glass:hover {
+      box-shadow: 0 12px 48px rgba(0,40,160,0.20);
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      height: 110px;
+    }
+    .header img {
+      height: 100px;
+      width: 100px;
+      border-radius: 20px;
+      border: 3px solid #fff;
+      margin-right: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .header h1 {
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 2px;
+      font-size: 2.8em;
+      color: #23265a;
+      margin-left: 32px;
+      text-shadow: 0 2px 6px #bfd4ff;
+      flex: 1;
+      animation: fadeInDown 1s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px);}
+      to   { opacity: 1; transform: translateY(0);}
+    }
+    .nav {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 15px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.10);
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(50,80,180,0.04);
+    }
+    .nav a {
+      text-decoration: none;
+      color: #1668c6;
+      font-weight: 600;
+      font-size: 1.2em;
+      padding: 22px 36px;
+      display: block;
+      position: relative;
+      transition: color 0.25s;
+    }
+    .nav a:after {
+      content: "";
+      display: block;
+      height: 3px;
+      background: linear-gradient(90deg, #1668c6 30%, #2fa7ab 100%);
+      width: 0;
+      transition: width 0.2s;
+      margin-top: 8px;
+      border-radius: 2px;
+    }
+    .nav a:hover,
+    .nav a:focus {
+      color: #23265a;
+      background: rgba(255,255,255,0.23);
+      text-shadow: 0 1px 6px #80c9ff55;
+    }
+    .nav a:hover:after,
+    .nav a:focus:after {
+      width: 100%;
+    }
+
+    /* Interactive Button Ripple Effect */
+    .nav a {
+      overflow: hidden;
+      position: relative;
+    }
+    .nav a .ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple 0.4s linear;
+      background: rgba(23,104,198,0.3);
+      pointer-events: none;
+    }
+    @keyframes ripple {
+      to {
+        transform: scale(2.5);
+        opacity: 0;
+      }
+    }
+    @media (max-width: 800px) {
+      .glass { width: 98vw; padding: 6px 4px;}
+      .nav a { font-size: 1em; padding: 16px 12px; }
+      .header h1 { font-size: 1.2em;}
+      .header img {height: 60px; width: 60px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="glass">
+    <div class="header">
+      <img src="kluh.png" alt="Store Logo">
+      <h1>Welcome to Online Product Store</h1>
+    </div>
+    <nav class="nav">
+      <a href="home.html" target="empty">Home</a>
+      <a href="registration.html" target="empty">Registration</a>
+      <a href="loginpage.html" target="empty">Login</a>
+      <a href="contact.html" target="empty">Contact</a>
+    </nav>
+  </div>
+  <script>
+    // Add a ripple effect on nav links
+    document.querySelectorAll('.nav a').forEach(el => {
+      el.addEventListener('click', function(e) {
+        let ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.left = (e.clientX - el.getBoundingClientRect().left) + 'px';
+        ripple.style.top = (e.clientY - el.getBoundingClientRect().top) + 'px';
+        el.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 400);
+      });
+    });
+  </script>
+</body>
+</html>

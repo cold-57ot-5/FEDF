@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📖 Modern Bookstore</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">📖 BookWorld</h1>
+      <nav class="nav">
+        <span class="nav-item">Home</span>
+        <span class="nav-item">Categories</span>
+        <span class="nav-item">About</span>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <section class="hero">
+      <div class="container">
+        <h2 class="hero-title">Discover Amazing Books</h2>
+        <p class="hero-subtitle">Find your next favorite read from our curated collection</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="content-grid">
+        <section class="books-section">
+          <h3 class="section-title">Featured Books</h3>
+          <div class="book-grid" id="bookList"></div>
+        </section>
+
+        <aside class="cart-sidebar">
+          <div class="cart-container">
+            <h3 class="cart-title">🛒 Your Cart</h3>
+            <div id="cartItems" class="cart-items"></div>
+            <div class="cart-footer">
+              <div class="cart-total" id="cartTotal">Total: ₹0</div>
+              <button class="checkout-btn">Proceed to Checkout</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { displayBooks } from './books.js';
+    import { updateCartUI } from './ui.js';
+    import { cart } from './cart.js';
+    // Display books on page load
+    displayBooks();
+    // Initialize empty cart display
+    updateCartUI(cart);
+  </script>
+</body>
+</html>

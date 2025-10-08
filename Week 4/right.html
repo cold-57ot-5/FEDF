@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Product Store</title>
+  <link href="https://fonts.googleapis.com/css?family=Orbitron:700|Roboto:400" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(115deg, #6a85b6 0%, #bac8e0 100%);
+      font-family: 'Roboto', Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      background: rgba(36,76,160,0.70);
+      backdrop-filter: blur(8px);
+      z-index: 1002;
+      padding: 0 0 1px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 14px rgba(36,110,200,0.20);
+    }
+    nav a {
+      color: #fff;
+      margin: 0 26px;
+      padding: 17px 0 13px 0;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.14em;
+      position: relative;
+      letter-spacing: .7px;
+      text-shadow: 0 2px 12px #64c4fa90;
+      border-radius: 10px 10px 0 0;
+      transition: background 0.22s, color 0.21s, box-shadow 0.2s;
+    }
+    nav a:hover, nav a.active {
+      background: rgba(255,255,255,0.16);
+      color: #4fe2f7;
+      box-shadow: 0 4px 16px #83e5ffc0;
+    }
+    header {
+      margin-top: 75px;
+      margin-bottom: 0;
+      text-align: center;
+      padding: 20px 0 3px 0;
+    }
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: #23335a;
+      font-size: 2.45em;
+      letter-spacing: 1.7px;
+      text-shadow: 0 2px 12px #bae9fd92;
+      margin: 0 0 0.7em 0;
+      animation: fadeInDown 1.05s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-33px);}
+      to   { opacity: 1; transform: translateY(0);}
+    }
+    .glass-section {
+      background: rgba(255,255,255,0.15);
+      border-radius: 22px;
+      border: 2px solid rgba(255,255,255,0.27);
+      box-shadow: 0 8px 32px rgba(40,90,160,0.13);
+      margin: 35px auto 27px auto;
+      padding: 28px 30px 20px 30px;
+      max-width: 1180px;
+      width: 92vw;
+      backdrop-filter: blur(11px);
+      animation: fadeInDown 0.9s;
+    }
+    /* Slideshow styles */
+    .slideshow-container {
+      width: 100%;
+      height: 290px;
+      position: relative;
+      border-radius: 18px;
+      box-shadow: 0 2px 30px #79c5f529;
+      overflow: hidden;
+      background: rgba(180,210,250,0.13);
+      margin: 0 auto 23px auto;
+      min-height: 180px;
+      transition: box-shadow 0.24s;
+    }
+    .slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      z-index: 0;
+      transition: opacity 1.1s;
+    }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 18px;
+      filter: brightness(93%) saturate(112%) drop-shadow(0 2px 12px #3d546071);
+    }
+    .slide.active {
+      opacity: 1;
+      z-index: 2;
+      transition: opacity 1.3s;
+    }
+    .slide-caption {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      padding: 20px 0 12px 33px;
+      font-size: 1.17em;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 0 2px 12px #2b779eb9;
+      background: linear-gradient(0deg, #23335a88 80%, transparent);
+      letter-spacing: .8px;
+      border-radius: 0 0 18px 18px;
+      z-index: 10;
+      pointer-events: none;
+      opacity: .89;
+    }
+    .slide-btns {
+      position: absolute;
+      bottom: 18px;
+      right: 30px;
+      display: flex;
+      gap: 11px;
+      z-index: 11;
+    }
+    .slide-btn {
+      width: 15px;
+      height: 15px;
+      background: #e2eefdcc;
+      border-radius: 50%;
+      border: 2.5px solid #63c4ffda;
+      cursor: pointer;
+      box-shadow: 0 1px 8px #4cb1e6;
+      transition: background 0.12s, border 0.18s;
+      outline: none;
+      opacity: 0.7;
+    }
+    .slide-btn.active {
+      background: #1895ff;
+      border-color: #68f0f8;
+      opacity: 1;
+    }
+    section {
+      background: rgba(255,255,255,0.13);
+      border-radius: 17px;
+      padding: 23px 30px 13px 30px;
+      margin: 28px 0;
+      box-shadow: 0 2px 12px #82e6fd44;
+      border-left: 5px solid #1895ff48;
+      transition: box-shadow 0.15s;
+    }
+    section a {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.09em;
+      color: #1879d7;
+      font-weight: 700;
+      text-decoration: none;
+      margin-right: 8px;
+      letter-spacing: .4px;
+      border-bottom: 2px solid #44e1e766;
+      transition: color 0.18s, border 0.17s;
+      padding: 2px 0 2px 0;
+    }
+    section a:hover {
+      color: #1dcee9;
+      border-bottom: 2px solid #47eef0;
+      text-shadow: 0 1px 4px #5fd5f4ba;
+    }
+    section p {
+      color: #1a314f;
+      font-size: 1.13em;
+      margin-top: 8px;
+    }
+    footer {
+      background: rgba(36,76,160,0.75);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      padding: 17px 6px;
+      position: relative;
+      bottom: 0;
+      width: 100vw;
+      letter-spacing: .8px;
+      box-shadow: 0 0 24px #61d6ff61;
+      border-radius: 18px 18px 0 0;
+      margin-top: 34px;
+      font-size: 1.05em;
+      z-index: 98;
+    }
+    @media (max-width: 900px) {
+      .glass-section {padding: 6px 4vw;}
+      .slideshow-container { height: 190px;}
+      section {padding: 9px 8vw;}
+    }
+    @media (max-width: 600px) {
+      header {margin-top: 55px;}
+      .glass-section {padding: 3vw;}
+      .slideshow-container {height: 111px;}
+      section {padding: 5px 4vw;}
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#laptops">Laptops</a>
+    <a href="#mobiles">Mobiles</a>
+    <a href="#routers">WiFi Routers</a>
+    <a href="#pendrives">Pendrives</a>
+  </nav>
+  <header>
+    <h1>List of Products</h1>
+  </header>
+  <div class="glass-section">
+    <!-- Slideshow -->
+    <div class="slideshow-container" id="slideshow">
+      <div class="slide active"><img src="laptop.jpg" alt="Laptops"><div class="slide-caption">Latest & Top-performing Laptops</div></div>
+      <div class="slide"><img src="mobile.jpg" alt="Mobiles"><div class="slide-caption">Best Mobiles in Indian Market</div></div>
+      <div class="slide"><img src="wifirouter.jpg" alt="WiFi Routers"><div class="slide-caption">High-speed WiFi Routers</div></div>
+      <div class="slide"><img src="pendrive.jpg" alt="Pendrives"><div class="slide-caption">Reliable USB Drives of All Capacities</div></div>
+      <div class="slide-btns">
+        <span class="slide-btn active" onclick="showSlide(0)"></span>
+        <span class="slide-btn" onclick="showSlide(1)"></span>
+        <span class="slide-btn" onclick="showSlide(2)"></span>
+        <span class="slide-btn" onclick="showSlide(3)"></span>
+      </div>
+    </div>
+
+    <section id="laptops">
+      <a href="laptops.html" target="empty">Laptops</a>
+      <p>Explore the latest and top-performing laptops in India.</p>
+    </section>
+    <section id="mobiles">
+      <a href="mobiles.html" target="empty">Mobiles</a>
+      <p>Check out the best mobile phones available in the Indian market.</p>
+    </section>
+    <section id="routers">
+      <a href="wifirouters.html" target="empty">WiFi Routers</a>
+      <p>Browse our collection of high-speed WiFi routers.</p>
+    </section>
+    <section id="pendrives">
+      <a href="pendrives.html" target="empty">Pendrives</a>
+      <p>Affordable and reliable USB flash drives of all capacities.</p>
+    </section>
+  </div>
+  <footer>
+    <p>&copy; 2025 Online Product Store | Contact: drysubbarayudu@gmail.com</p>
+  </footer>
+  <script>
+    // Slideshow with interactive navigation btns
+    var slides = document.querySelectorAll('.slide');
+    var btns = document.querySelectorAll('.slide-btn');
+    var curr = 0;
+    var timer;
+    function showSlide(idx) {
+      slides[curr].classList.remove('active');
+      btns[curr].classList.remove('active');
+      curr = idx;
+      slides[curr].classList.add('active');
+      btns[curr].classList.add('active');
+      resetSlideTimer();
+    }
+    function nextSlide() {
+      showSlide((curr + 1) % slides.length);
+    }
+    function resetSlideTimer() {
+      clearInterval(timer);
+      timer = setInterval(nextSlide, 4000);
+    }
+    resetSlideTimer();
+    // Resume automatic slideshow on page load and on any click.
+    document.getElementById('slideshow').addEventListener('mouseenter', ()=>clearInterval(timer));
+    document.getElementById('slideshow').addEventListener('mouseleave', resetSlideTimer);
+
+    // Smooth scroll nav
+    document.querySelectorAll('nav a').forEach(a => {
+      a.onclick = function(e) {
+        const hash = this.getAttribute('href');
+        if(hash[0] ===

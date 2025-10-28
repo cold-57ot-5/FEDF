@@ -1,29 +1,28 @@
-# FEDF Project
+# Feedback App (Week 10)
 
-This project is a simple web application created as part of the FEDF lab sessions.
+Simple React + Redux Toolkit + Material UI feedback form built with Vite.
 
-## Overview
+Features
+- Select a rating (1-5)
+- Optional comment
+- Submits feedback to Redux store and displays list below
 
-The project contains a basic HTML structure with a single webpage. The webpage includes a title and a heading that introduces the project.
+Quick start
 
-## Files
+1. Install dependencies
 
-- **week 1/index.html**: Contains the HTML structure of the webpage.
-- **.gitignore**: Specifies files and directories to be ignored by Git.
-- **README.md**: Provides documentation for the project.
+```powershell
+cd "c:\Users\Div\Desktop\FEDF\week10\feedback-app"
+npm install
+```
 
-## Setup Instructions
+2. Run dev server
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/cold-57ot-5/FEDF.git
-   ```
-2. Navigate to the project directory:
-   ```
-   cd FEDF
-   ```
-3. Open the `week 1/index.html` file in a web browser to view the webpage.
+```powershell
+npm run dev
+```
 
-## Contributing
-
-Feel free to fork the repository and submit pull requests for any improvements or features you would like to add.
+Notes
+- The app uses Redux Toolkit slice at `src/features/feedbackSlice.js`.
+- Store is configured in `src/app/store.js` and wired in `src/main.jsx`.
+- UI is built using Material UI components.
